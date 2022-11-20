@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bajo Esquina</title>
+    <link rel="stylesheet" href="https://bootswatch.com/5/slate/bootstrap.min.css">
+    <style>
+        #circle {
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            border-radius: 50%;
+            font-size: 12px;
+            color: #000;
+            text-align: center;
+            background: #fff
+        }
+
+
+
+        #arrow {
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 3px;
+            margin-left: 45px;
+            transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar-collapse.justify-content-center navbar-dark bg-primary sticky-top">
+        <div class="d-flex justify-content-center">
+                <img src="../static/logo01.png" alt="" width="580" height="70" class="d-inline-block align-text-top mt-2">
+        </div>
+    </nav>
+    <br><br>
+    <div class="container">
+        <form action="/" method="POST">
+            <div class="form-group">
+                <label>Origen: </label>
+                <select name="org1" class="form-select" aria-label="Default select example">
+                    <option value="invalid" selected>Selecciona origen</option>
+                    {% for e in estacionLinea %}
+                    <option value={{e}}>{{e}}</option>
+                    {% endfor%}
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Destino: </label>
+                <select name="org2" class="form-select" aria-label="Default select example">
+                    <option value="invalid" selected>Selecciona destino</option>
+                    {% for e in estacionLinea %}
+                    <option value={{e}}>{{e}}</option>
+                    {% endfor%}
+
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-2">enviar</button>
+        </form>
+    </div>
+
+    <br>
+    <div class="container">
+        {% if destinos %}
+        <h1>Origen: {{destinos.0}}</h1>
+        <h1>Destino: {{destinos.1}}</h1>
+        {% endif %}
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <h1>Ruta a seguir:</h1>
+                    <div class="col-md-4 col-lg-4 col-sm-1">
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-sm-1">
+                            {% if rutamin %}
+                            {% for e in rutamin['ruta'] %}
+                            {% if e!= destinos.0 %}
+                            <p id="arrow" class=""></p>
+                            {% endif %}
+                            <h5 id="circle">{{e}}</h5>
+                            {% endfor%}
+                            {% endif %}
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-sm-1">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                {% if tiempo %}
+                <h1>Tiempo total: </h1>
+                <h5>{{tiempo.0}} minutos con {{tiempo.1}} segundos </h5>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="container">
+
+    </div>
+    <br><br><br>
+
+</body>
+
+</html>
