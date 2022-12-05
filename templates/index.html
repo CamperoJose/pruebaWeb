@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bajo Esquina</title>
     <link rel="stylesheet" href="https://bootswatch.com/5/slate/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Raleway:wght@100&display=swap"
@@ -34,6 +36,138 @@
             transform: rotate(45deg);
             -webkit-transform: rotate(45deg);
         }
+
+        input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .label_linea {
+            border: 1px solid #fff;
+            padding: 10px;
+            display: block;
+            position: relative;
+            margin: 10px;
+            cursor: pointer;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border-radius: 10px;
+        }
+        
+        .label_linea::before {
+            background-color: white;
+            color: white;
+            content: " ";
+            display: block;
+            border-radius: 50%;
+            border: 1px solid grey;
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            line-height: 28px;
+            transition-duration: 0.4s;
+            transform: scale(0);
+        }
+
+        .label_linea img {
+            height: 50px;
+            width: 50px;
+            transition-duration: 0.2s;
+            transform-origin: 50% 50%;
+        }
+
+        :checked+.label_linea {
+            border-color: #ddd;
+        }
+
+        :checked+.label_linea::before {
+            content: "✓";
+            background-color: grey;
+            transform: scale(1);
+        }
+
+        /* :checked+.label_linea img {
+        transform: scale(0.9);
+        box-shadow: 0 0 5px #333;
+        z-index: -1;
+        } */
+
+        .tarjetas {
+            /*image size*/
+            width: 100px;
+        }
+
+        /* .tarjetas:hover {
+            width: 150px;
+        } */
+
+        input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .label_tarjeta {
+            border: 1px solid #fff;
+            padding: 10px;
+            display: block;
+            position: relative;
+            margin: 10px;
+            cursor: pointer;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border-radius: 10px;
+        }
+        
+        .label_tarjeta::before {
+            background-color: white;
+            color: white;
+            content: " ";
+            display: block;
+            border-radius: 50%;
+            border: 1px solid grey;
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            line-height: 28px;
+            transition-duration: 0.4s;
+            transform: scale(0);
+        }
+
+
+        .label_tarjeta img {
+            width: 100px;
+            transition-duration: 0.2s;
+            transform-origin: 50% 50%;
+        }
+
+        :checked+.label_tarjeta {
+            border-color: #ddd;
+        }
+
+        :checked+.label_tarjeta::before {
+            content: "✓";
+            background-color: grey;
+            transform: scale(1);
+        }
+        
     </style>
 </head>
 
@@ -46,10 +180,104 @@
     <br><br>
     <div class="container">
         <form action="/" method="POST">
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Escoja una tarjeta del teleferico
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="form-check col-md-4 col-sm-12">
+                                        <input class="form-check -input" type="radio" name="tarjeta" id="tarjeta1" value="1" checked>
+                                        <label class="form-check-label label_tarjeta" for="tarjeta1">
+                                        <img class="tarjetas" src="../static/tarjeta_normal.png" /> Tarjeta Normal
+                                        </label>
+                                    </div>
+                                    <div class="form-check col-md-4 col-sm-12">
+                                        <input class="form-check -input" type="radio" name="tarjeta" id="tarjeta2" value="2">
+                                        <label class="form-check-label label_tarjeta" for="tarjeta2">
+                                        <img class="tarjetas" src="../static/tarjeta_estudiantil.png" /> Tarjeta Estudiantil
+                                        </label>
+                                    </div>
+                                    <div class="form-check col-md-4 col-sm-12">
+                                        <input class="form-check -input" type="radio" name="tarjeta" id="tarjeta3" value="3">
+                                        <label class="form-check-label label_tarjeta" for="tarjeta3">
+                                        <img class="tarjetas" src="../static/tarjeta_preferencial.png" /> Tarjeta Preferencial
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Escoja las líneas que no se encuentran disponibles
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12">
+                                        <input type="checkbox"  name="Azul" value="Azul" id="Azul">
+                                        <label for="Azul" class="label_linea"><img src="../static/icono-azul.png" />  Azul</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <input type="checkbox"  name="Cafe" id="Cafe">
+                                        <label for="Cafe" class="label_linea"><img src="../static/icono-cafe.png" />  Cafe</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <input type="checkbox"  name="Plateada" id="Plateada">
+                                        <label for="Plateada" class="label_linea"><img src="../static/icono-plateada.png" />  Plateada</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <input type="checkbox"  name="Naranja" id="Naranja">
+                                        <label for="Naranja" class="label_linea"><img src="../static/icono-naranja.png" />  Naranja</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <input type="checkbox"  name="Roja" id="Roja">
+                                        <label for="Roja" class="label_linea"><img src="../static/icono-roja.png" />  Roja</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <input type="checkbox"  name="Verde" id="Verde">
+                                        <label for="Verde" class="label_linea"><img src="../static/icono-verde.png" />  Verde</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <input type="checkbox"  name="Celeste" id="Celeste">
+                                        <label for="Celeste" class="label_linea"><img src="../static/icono-celeste.png" />  Celeste</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <input type="checkbox"  name="Blanca" id="Blanca">
+                                        <label for="Blanca" class="label_linea"><img src="../static/icono-blanca.png" />  Blanca</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <input type="checkbox"  name="Amarilla" id="Amarilla">
+                                        <label for="Amarilla" class="label_linea"><img src="../static/icono-amarilla.png" />  Amarilla</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <input type="checkbox"  name="Morada" id="Morada">
+                                        <label for="Morada" class="label_linea"><img src="../static/icono-morada.png" /> Morada</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+
+
             <div class="form-group">
                 <label>Origen: </label>
                 <select name="org1" class="form-select" aria-label="Default select example">
-                    <option value="invalid" selected>Selecciona origen</option>
                     {% for e in estacionLinea %}
                     <option value={{e}}>{{e}}</option>
                     {% endfor%}
@@ -60,10 +288,18 @@
             <div class="form-group">
                 <label>Destino: </label>
                 <select name="org2" class="form-select" aria-label="Default select example">
-                    <option value="invalid" selected>Selecciona destino</option>
                     {% for e in estacionLinea %}
                     <option value={{e}}>{{e}}</option>
                     {% endfor%}
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Optimizar: </label>
+                <select name="opt" class="form-select" aria-label="Default select example">
+                    <option value="Tiempo">Tiempo</option>
+                    <option value="Dinero">Dinero</option>
 
                 </select>
             </div>
@@ -73,20 +309,41 @@
     </div>
 
     <br>
+
     <div class="container">
         {% if destinos %}
         <h1>Origen: {{destinos.0}}</h1>
         <h1>Destino: {{destinos.1}}</h1>
+        <h1>Optimizar: {{opt}}</h1>
         {% endif %}
+
+        {% if lineas_deshabilitadas %}
+            <h1>Lineas deshabilitadas: </h1>
+                {% for i in lineas_deshabilitadas%}
+                <h3>{{i}}</h3>
+                {% endfor %}
+        {% endif %}
+
     </div>
     <hr>
+    {% if rutaPosible == False %}
     <div class="container">
+        <h1>No existe una ruta disponible</h1>
+    </div>
+    {% else %}
+        <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-6">
                 {% if tiempo %}
                 <h1>Tiempo total: </h1>
                 <h5>{{tiempo.0}} minutos con {{tiempo.1}} segundos </h5>
                 {% endif %}
+
+                {% if precio %}
+                <h1>Precio total: </h1>
+                <h5>Bs {{precio}}  </h5>
+                {% endif %}
+
             </div>
 
             <div class="col-sm-12 col-md-6 col-lg-6">
@@ -98,7 +355,7 @@
                     </div>
                     <div class="col mt-3">
                         {% if rutamin %}
-                        {% for e in rutamin['ruta'] %}
+                        {% for e in rutamin %}
                         {% if e!= destinos.0 %}
                         <p id="arrow" class="me-5"></p>
                         {% endif %}
@@ -112,6 +369,8 @@
             </div>
         </div>
     </div>
+    {% endif %}
+
 
     <hr>
     <div class="container">
